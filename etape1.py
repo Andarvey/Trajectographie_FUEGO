@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Charger le modèle .obj
-mesh = trimesh.load('C:/Users/Louis/Documents/2024-25/ASTRE/fusée_3d.obj')
+mesh = trimesh.load('C:/Users/Louis/Documents/2024-25/ASTRE/fusée_3d.obj') #valable sur mon pc en local à ADAPTER
 
 # Obtenir les sommets et les faces
 vertices = mesh.vertices
