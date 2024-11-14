@@ -1,10 +1,8 @@
-#author : Louis Bonamy - start : 7/11/2024 - end : 7/11/2024
+#author : Louis Bonamy - start : 7/11/2024 - end : ?/??/2024
 #coding utf-8
 
 """
 Place à l'origine d'un plot 3D un fichier au format .obj.
-Problèmes : - les proportions ne sont toujours pas bonnes malgré les corrextion, je ne comprends pas.
-            - localisation du fichier objet, ici il s'agit d'un chemin local et non à partir du git
 """
 
 import trimesh
@@ -12,7 +10,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Charger le modèle .obj
-mesh = trimesh.load('C:/Users/Louis/Documents/Trajectographie_FUEGO') #valable sur mon pc en local à ADAPTER
+mesh = trimesh.load('fusée_3d.obj', file_type='obj')
 
 # Obtenir les sommets et les faces
 vertices = mesh.vertices
@@ -21,9 +19,6 @@ faces = mesh.faces
 # Initialiser le graphique 3D
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-
-ax.axis('equal')
-ax.set_box_aspect([1, 1, 1])
 
 # Tracer les faces du modèle 3D
 ax.plot_trisurf(
@@ -45,6 +40,7 @@ ax.set_xlim(*x_limits)
 ax.set_ylim(*y_limits)
 ax.set_zlim(*z_limits)
 
-#ax.set_box_aspect([1,1,1])  # Aspect ratio 1:1:1
+ax.axis('equal')
+ax.set_box_aspect([1,1,1])  # Aspect ratio 1:1:1
 
 plt.show()
