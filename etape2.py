@@ -3,6 +3,8 @@
 
 """
 Une fonction qui place la fusée dans le plot en fonction de 3 coordonnées d'espace et 3 d'angles (à adapter avec les données du capteur)
+
+Problèmes : - le point 0 du repère n'est pas strictement au milieu, ce n'est pas un problème de code mais de construction du modèle
 """
 import trimesh
 import matplotlib.pyplot as plt
