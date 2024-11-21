@@ -1,4 +1,4 @@
-#author : Louis Bonamy - start : 7/11/2024 - end : 
+#author : Louis Bonamy - start : 7/11/2024 - end : 21/11/2024 
 #coding utf-8
 
 """
@@ -17,6 +17,41 @@ def translate_mesh(mesh, translation_vector):
     """
     # Appliquer la translation à chaque sommet
     mesh.vertices += translation_vector
+    return mesh
+
+def rotate_mesh(mesh, angles):
+    """
+    Applique des rotations (roll, pitch, yaw) au modèle.
+    
+    Args:
+        mesh (trimesh.Trimesh): Le modèle 3D à transformer.
+        angles (tuple): Angles de roulis, tangage et lacet en degrés (r, l, t).
+    """
+    # Convertir les angles en radians
+    roll, pitch, yaw = np.radians(angles)
+
+    # Matrices de rotation
+    R_x = np.array([
+        [1, 0, 0],
+        [0, np.cos(roll), -np.sin(roll)],
+        [0, np.sin(roll), np.cos(roll)]
+    ])
+    
+    R_y = np.array([
+        [np.cos(pitch), 0, np.sin(pitch)],
+        [0, 1, 0],
+        [-np.sin(pitch), 0, np.cos(pitch)]
+    ])
+    
+    R_z = np.array([
+        [np.cos(yaw), -np.sin(yaw), 0],
+        [np.sin(yaw), np.cos(yaw), 0],
+        [0, 0, 1]
+    ])
+
+    # Appliquer la rotation : ordre Z (yaw), Y (pitch), X (roll)
+    rotation_matrix = R_z @ R_y @ R_x
+    mesh.vertices = np.dot(mesh.vertices, rotation_matrix.T)
     return mesh
 
 def placement(x,y,z,r,l,t):
@@ -38,6 +73,9 @@ def placement(x,y,z,r,l,t):
 
     # Appliquer la translation
     mesh = translate_mesh(mesh, translation_vector)
+    
+    # Appliquer les rotations
+    mesh = rotate_mesh(mesh, (r, t, l))  # Note : ordre (roll, pitch, yaw)
 
     # Obtenir les sommets et les faces
     vertices = mesh.vertices
