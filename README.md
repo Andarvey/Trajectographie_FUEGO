@@ -24,6 +24,8 @@ TERMINEE etape 2 : placer le fichier dans le plot en fonction des coordonnée (3
 
 EN COURS etape 3 : animer pour une séquence de coordonnées
 
+Pyside à l'air très bien.
+
 etape 4 : recevoir les infos en direct et les afficher
 
 idées pour plus tard :
